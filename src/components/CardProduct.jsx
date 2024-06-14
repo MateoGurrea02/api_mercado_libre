@@ -1,29 +1,50 @@
-import React from 'react'
+import React from "react";
 
-function CardProduct({title,precio}) {
+
+function CardProduct({ product }) {
   return (
     <>
-      <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-        <div class="group relative">
-          <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-            <img src="" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full"/>
+      <div className="group relative shadow-lg m-10 max-w-80">
+        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+          <img
+            src={product.thumbnail}
+            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+          />
+        </div>
+        <div className="pt-4 flex flex-col justify-between p-5 bg-white">
+          <div>
+            <h3 className="">
+              <a href="#" className="font-light black text-black">
+                <span aria-hidden="true" className="absolute inset-0"></span>
+                {product.title}
+              </a>
+            </h3>
           </div>
-          <div class="mt-4 flex justify-between">
-            <div>
-              <h3 class="text-sm text-gray-700">
-                <a href="#">
-                  <span aria-hidden="true" class="absolute inset-0"></span>
-                  Basic Tee
-                </a>
-              </h3>
-              <p class="mt-1 text-sm text-gray-500">Black</p>
+          {product.original_price ? (
+            <div className="flex">
+              <p className="text-gray-400 mt-2 line-through">
+                ${product.original_price.toLocaleString("es-AR")}
+              </p>
             </div>
-            <p class="text-sm font-medium text-gray-900">$35</p>
-          </div>
+          ) : (
+            ""
+          )}
+          {product.price ? (
+            <p className="font-normal text-2xl text-black">${product.price}</p>
+          ) : (
+            ""
+          )}
+          {product.shipping.free_shipping ? (
+            <p className="text-[#31B771] font-semibold text-sm ">
+              Envío gratis
+            </p>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default CardProduct
+export default CardProduct;
