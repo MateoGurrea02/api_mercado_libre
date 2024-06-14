@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header'
-import CardProduct from './components/CardProduct'
-import FetchData from './components/FetchData';
-import Loader from './components/Loader';
+import Header from '../components/Header'
+import CardProduct from '../components/CardProduct'
+import FetchData from '../components/FetchData';
+import Loader from '../components/Loader';
 
 
-function App() {
+function Home() {
   const [data, setData] = useState(null)
   const [inputUser, setInputUser] = useState('')
   const [iSearch, setISearch] = useState(false)
@@ -74,4 +74,4 @@ function App() {
   )
 }
 
-export default App
+export default Home
