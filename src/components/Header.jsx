@@ -1,7 +1,20 @@
-import React from 'react'
 import logo from '../assets/logo.png';
+import React, { useState, useEffect } from 'react';
 
-function Header() {
+
+
+function Header({getInputUser}) {
+  const [ValorDeBusqueda, setValorDeBusqueda] = useState(''); 
+
+  const handleInput = (e) => {
+    setValorDeBusqueda(e.target.value)
+  }
+
+  const handleSubmit = () => {
+    getInputUser(ValorDeBusqueda)
+  }
+
+
   return (
     <>
       <nav className='flex flex-row justify-between bg-yellow-300 p-5 items-center absolute top-0 inset-x-0'>
@@ -9,8 +22,14 @@ function Header() {
           <img src={logo} alt="" className='w-40'/>
         </div>
         <div className='flex items-center basis-3/4 ml-10'>
-          <input type="text" id="lupa"className='basis-2/4 shadow-md p-2 outline-none' placeholder='Buscar productos,marcas y mas...'/>
-          <label htmlFor="lupa" className='bg-white p-1 cursor-pointer '>
+          <input 
+            type="text" 
+            id="lupa"
+            className='basis-2/4 shadow-md p-2 outline-none' 
+            placeholder='Buscar productos,marcas y mas...' 
+            onChange={(e) => handleInput(e)}
+            />
+          <label htmlFor="lupa" className='bg-white p-1 cursor-pointer' onClick={() => handleSubmit()}>
             <div className='border-l-2 p-1 px-2 pl-3 border-inherit '>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
@@ -26,6 +45,8 @@ function Header() {
       </nav>
     </>
   )
+  
 }
+
 
 export default Header
