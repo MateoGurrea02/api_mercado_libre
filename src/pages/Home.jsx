@@ -1,38 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header'
-import CardProduct from './components/CardProduct'
-import FetchData from './components/FetchData';
-import Loader from './components/Loader';
+import Header from '../components/Header'
+import CardProduct from '../components/CardProduct'
+import Loader from '../components/Loader';
+import useFetch from '../hooks/use-fetch';
 
 
-function App() {
-  const [data, setData] = useState(null)
+function Home() {
   const [inputUser, setInputUser] = useState('')
   const [iSearch, setISearch] = useState(false)
   const [offSet, setOffSet] = useState(0)
   const [contadorPagina, setContadorPagina] = useState(1)
+  const url = `https://api.mercadolibre.com/sites/MLA/search?q=${inputUser}&offset=${offSet}&limit=${iSearch ? 8 : 4}`
+  const {data, isLoading, error} = useFetch(url)
 
   const getInputUser = (inputUser) => {
 		setInputUser(inputUser)
     setISearch(true)
 	}
-
-  const getData = async () => {
-    try {
-      const response = await FetchData(`https://api.mercadolibre.com/sites/MLA/search?q=${inputUser}&offset=${offSet}&limit=${iSearch ? 8 : 4}`);
-      setData(response)
-    } catch (error) {
-      console.error('Error al obtener los datos:', error);
-    }
-  }
-
-  useEffect(() => {
-    if (inputUser == null || inputUser == "") {
-		}
-		else {
-      getData();
-		}
-	}, [inputUser,offSet]);
 
   const handleOffset = (isForward, jumps) => {
 		if (isForward) {
@@ -49,13 +33,11 @@ function App() {
     <div className='flex-col'>
       <Header getInputUser={getInputUser}/>
       <div className="flex justify-center flex-wrap absolute top-40 ">
-        {data ? data.results.map((product)=> (<CardProduct key={product.id} product={product}/>)) 
+        {!isLoading ? 
+        data.map((product)=> (<CardProduct key={product.id} product={product}/>)) 
         : 
-        (iSearch ? 
-          <Loader/> 
-          : 
-          <h1>Que tal</h1>
-        )}
+        <Loader/>
+        }
       </div>
       <div className='flex justify-center py-5'>
 					<div className=' cursor-pointer rotate-180 my-auto' onClick={() => iSearch ? handleOffset(false, (iSearch ? 8 : 4)) : ''}>
@@ -74,4 +56,4 @@ function App() {
   )
 }
 
-export default App
+export default Home
