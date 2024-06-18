@@ -3,7 +3,6 @@ import Header from '../components/Header'
 import CardProduct from '../components/CardProduct'
 import Loader from '../components/Loader';
 import useFetch from '../hooks/use-fetch';
-import ProductDetail from './ProductDetail';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 
@@ -39,9 +38,9 @@ function Home() {
 
   return (
 
-    <div className='flex-col'>
+    <div className='flex flex-col'>
       <Header getInputUser={getInputUser} />
-      <div className="flex justify-center flex-wrap absolute top-40 ">
+      <div className="flex justify-center flex-wrap mt-40">
         {!isLoading ?
           data.map((product) => (
             <CardProduct
@@ -52,21 +51,25 @@ function Home() {
           <Loader />
         }
       </div>
-      <div className='py-5'>
-        <div className="flex items-end justify-center my-auto">
-          <div className='cursor-pointer rotate-180' onClick={() => iSearch ? handleOffset(false, (iSearch ? 8 : 4)) : ''}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-            </svg>
-          </div>
-          <p className='mx-2'>{contadorPagina}</p>
-          <div className='cursor-pointer' onClick={() => iSearch ? handleOffset(true, (iSearch ? 8 : 4)) : ''}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-            </svg>
+      {iSearch ? 
+        <div className='flex justify-center mt-5 mb-10'>
+          <div className="flex justify-items-center">
+            <div className='cursor-pointer rotate-180' onClick={() => iSearch ? handleOffset(false, (iSearch ? 8 : 4)) : ''}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </div>
+            <p className='mx-2 text-2xl'>{contadorPagina}</p>
+            <div className='cursor-pointer' onClick={() => iSearch ? handleOffset(true, (iSearch ? 8 : 4)) : ''}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
+      :
+      ''
+      }  
     </div>
   )
 }
