@@ -14,8 +14,8 @@ function CardProduct({ product }) {
         <div className="pt-4 flex flex-col justify-between p-5 bg-white">
           <div>
             <h3 className="">
-              <a href="#" className="font-light black text-black">
-                <span aria-hidden="true" className="absolute inset-0"></span>
+              <a href={`/product/${product.id}`} className="font-light black text-black">
+                
                 {product.title}
               </a>
             </h3>

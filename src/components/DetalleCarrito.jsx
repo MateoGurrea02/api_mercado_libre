@@ -1,5 +1,7 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import guardarProductosLocalStorage from '../utilities/guardarProductoLocalStorage';
+import obtenerProductosLocalStorage from '../utilities/obtenerProductosLocalStorage';
 
 const Carrito = ({ itemsCarrito }) => {
     // Calcular el subtotal, cantidad total y total
@@ -8,23 +10,62 @@ const Carrito = ({ itemsCarrito }) => {
     const envio = 5000; // Suponiendo un costo de envío fijo
     const total = subtotal + envio;
 
+    const [carrito, setCarrito] = useState(obtenerProductosLocalStorage())
+
+    //El incrementar no funciona, no se obtiene bien el carrito
+    const incrementarCantidad = (index) => {
+        const nuevoCarrito = [...Carrito]
+        nuevoCarrito[index].cantidad += 1
+        setCarrito(nuevoCarrito)
+        guardarProductosLocalStorage(nuevoCarrito)
+    }
+
+    //El decrementar no estaria funcionando, no se obtiene bien el carrito
+    const decrementarCantidad = (index) => {
+        const nuevoCarrito = [...Carrito]
+        if (nuevoCarrito[index].cantidad > 1) {
+            nuevoCarrito[index].cantidad -= 1
+            setCarrito(nuevoCarrito)
+            guardarProductosLocalStorage(nuevoCarrito)
+        }
+    }
+
+    //El eliminar funciona
+    const eliminarProducto = (index) => {
+        const nuevoCarrito = carrito.filter((_, i) => i !== index);
+        setCarrito(nuevoCarrito)
+        guardarProductosLocalStorage(nuevoCarrito)
+    }
+
     return (
         <div className="max-w-6xl mx-auto m-24 p-6 bg-white shadow-md rounded-lg flex flex-col md:flex-row">
             <div className="md:w-2/3">
                 {itemsCarrito.map((item, index) => (
                     <div key={index} className="flex border rounded-lg py-16 mb-4">
-                        <img src={item.image} alt={item.titulo} className="w-20 h-20 mx-4 object-cover rounded" />
+                        <img src={item.imagen} alt={item.titulo} className="w-20 h-20 mx-4 object-cover rounded" />
                         <div className=" flex-grow">
                             <div className="flex justify-between">
                                 <h2 className="text-lg font-bold">{item.titulo}</h2>
                                 <div class="flex items-center border-gray-100">
-                                    <span class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span>
-                                        <input id='cantidad'class="h-8 w-8 border bg-white text-center text-xs outline-none" type="number" value={item.cantidad} min="1" />
-                                    <span class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
-                                    <p className="text-sm px-10">${item.precio}</p>
+                                    <form class="max-w-xs mx-auto px-10">
+                                        <div class="relative flex items-center max-w-[8rem]">
+                                            <button onClick={() => decrementarCantidad(index)} type="button" id="decrement-button" data-input-counter-decrement="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                                </svg>
+                                            </button>
+                                            <input type="text" id="quantity-input" data-input-counter aria-describedby="helper-text-explanation" value={item.cantidad} class="bg-gray-50 border-x-0 border-gray-300 h-11 w-10 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="999" required />
+                                            <button onClick={() => incrementarCantidad(index)} type="button" id="increment-button" data-input-counter-increment="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </form>
+                                    <p className="text-lg px-10">${item.precio}</p>
                                 </div>
                             </div>
-                            <a href=""className='text-blue-400'>Eliminar</a>
+                            <a href="" onClick={() => eliminarProducto(index)} className='text-blue-400'>Eliminar</a>
                         </div>
                     </div>
                 ))}
