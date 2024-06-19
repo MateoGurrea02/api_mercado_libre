@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import guardarProductosLocalStorage from '../utilities/guardarProductoLocalStorage';
 import obtenerProductosLocalStorage from '../utilities/obtenerProductosLocalStorage';
+import Toast from './Toast';
 
 const Carrito = () => {
     const itemsCarrito = obtenerProductosLocalStorage()
@@ -11,6 +12,17 @@ const Carrito = () => {
     const total = subtotal + envio;
 
     const [carrito, setCarrito] = useState(obtenerProductosLocalStorage())
+    const [estadoToast, setEstadoToast] = useState(false);
+
+    const timeoutToast =()=>{
+        setTimeout(function() {
+        setEstadoToast(true)
+            setTimeout(function() {
+                setEstadoToast(false)
+                window.location.href = '/'
+            }, 3000);
+        }, 1000);
+    }
 
     //ya funciona
     const incrementarCantidad = (index) => {
@@ -38,9 +50,12 @@ const Carrito = () => {
 
     const finishSell = ()=>{
         localStorage.clear()
+        timeoutToast()
     }
 
     return (
+        <>
+        {estadoToast ? <Toast mensaje={"Compra Finalizada con exito"} /> : ""}
         <div className=" flex flex-col md:flex-row max-w-6xl m-24 p-6 bg-white shadow-md rounded-lg ">
             <div className="md:w-2/3 min-w-96">
                 {itemsCarrito.map((item, index) => (
@@ -101,6 +116,7 @@ const Carrito = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

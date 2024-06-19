@@ -10,7 +10,7 @@ function Home() {
   const [iSearch, setISearch] = useState(false)
   const [offSet, setOffSet] = useState(0)
   const [contadorPagina, setContadorPagina] = useState(1)
-  const url = `https://api.mercadolibre.com/sites/MLA/search?q=${inputUser}&offset=${offSet}&limit=${iSearch ? 16 : 4}`
+  const url = `https://api.mercadolibre.com/sites/MLA/search?q=${inputUser}&offset=${offSet}&limit=${iSearch ? 8 : 4}`
   const { data, isLoading, error } = useFetch(url)
 
   const getInputUser = (inputUser) => {
