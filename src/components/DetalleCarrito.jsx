@@ -12,7 +12,7 @@ const Carrito = () => {
 
     const [carrito, setCarrito] = useState(obtenerProductosLocalStorage())
 
-    //ya funciona hiciste cualquier cosa con esa lista que le metias xd JAJAJAJAJ
+    //ya funciona
     const incrementarCantidad = (index) => {
         const nuevoCarrito = itemsCarrito
         nuevoCarrito[index].cantidad += 1
@@ -20,7 +20,6 @@ const Carrito = () => {
         guardarProductosLocalStorage(nuevoCarrito)
     }
 
-    //Lo mismo que te puse arriba
     const decrementarCantidad = (index) => {
         const nuevoCarrito = itemsCarrito
         if (nuevoCarrito[index].cantidad > 1) {
@@ -43,7 +42,7 @@ const Carrito = () => {
 
     return (
         <div className=" flex flex-col md:flex-row max-w-6xl m-24 p-6 bg-white shadow-md rounded-lg ">
-            <div className="md:w-2/3">
+            <div className="md:w-2/3 min-w-96">
                 {itemsCarrito.map((item, index) => (
                     <div key={index} className="flex border rounded-lg py-16 mb-4">
                         <img src={item.imagen} alt={item.titulo} className="w-20 h-20 mx-4 object-cover rounded" />
@@ -76,7 +75,7 @@ const Carrito = () => {
                 ))}
             </div>
 
-            <div className="md:w-1/3 md:pl-6 mt-6 md:mt-0">
+            <div className="md:w-1/3 md:pl-6 mt-6 md:mt-0 min-w-96">
                 <div className="p-4 bg-gray-100 rounded-lg">
                     <h2 className="text-xl font-bold text-gray-900">Resumen de compra</h2>
                     <div className="mt-4">

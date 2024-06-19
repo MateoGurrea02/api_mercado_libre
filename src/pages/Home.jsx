@@ -3,7 +3,6 @@ import Header from '../components/Header'
 import CardProduct from '../components/CardProduct'
 import Loader from '../components/Loader';
 import useFetch from '../hooks/use-fetch';
-import { Navigate, useNavigate } from 'react-router-dom';
 
 
 function Home() {
@@ -11,19 +10,12 @@ function Home() {
   const [iSearch, setISearch] = useState(false)
   const [offSet, setOffSet] = useState(0)
   const [contadorPagina, setContadorPagina] = useState(1)
-  const url = `https://api.mercadolibre.com/sites/MLA/search?q=${inputUser}&offset=${offSet}&limit=${iSearch ? 8 : 4}`
+  const url = `https://api.mercadolibre.com/sites/MLA/search?q=${inputUser}&offset=${offSet}&limit=${iSearch ? 16 : 4}`
   const { data, isLoading, error } = useFetch(url)
-  const [selectedProduct, setSelectedProduct] = useState('')
-  const navigate = useNavigate()
-
 
   const getInputUser = (inputUser) => {
     setInputUser(inputUser)
     setISearch(true)
-  }
-
-  const handleProductClick = (productID) => {
-    navigate(`/product/${productID}`)
   }
 
   const handleOffset = (isForward, jumps) => {

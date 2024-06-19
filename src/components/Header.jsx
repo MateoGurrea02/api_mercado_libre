@@ -14,6 +14,12 @@ function Header({getInputUser}) {
     getInputUser(ValorDeBusqueda)
   }
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
 
   return (
     <>
@@ -27,11 +33,12 @@ function Header({getInputUser}) {
           <input 
             type="text" 
             id="lupa"
-            className='basis-2/4 shadow-md p-2 outline-none' 
+            className='basis-2/4 shadow-md rounded-sm p-2 outline-none' 
             placeholder='Buscar productos,marcas y mas...' 
             onChange={(e) => handleInput(e)}
+            onKeyDown={(e) => handleKeyDown(e)}
             />
-          <label htmlFor="lupa" className='bg-white p-1 cursor-pointer' onClick={() => handleSubmit()}>
+          <label htmlFor="lupa" className='bg-white p-1 -m-1 rounded-sm cursor-pointer' onClick={() => handleSubmit()}>
             <div className='border-l-2 p-1 px-2 pl-3 border-inherit '>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>

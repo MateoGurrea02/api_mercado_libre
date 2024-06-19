@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useFetch from '../hooks/use-fetch';
 import obtenerProductosLocalStorage from '../utilities/obtenerProductosLocalStorage';
 import guardarProductosLocalStorage from '../utilities/guardarProductoLocalStorage';
+import Toast from './Toast';
 
 const DetalleProducto = ({ producto }) => {
   const urlDescription = `https://api.mercadolibre.com/items/${producto.id}/description`
@@ -13,7 +14,7 @@ const DetalleProducto = ({ producto }) => {
       id: producto.id,
       titulo: producto.title,
       precio: producto.price,
-      imagen: producto.pictures ? producto.pictures[0].url : (producto.thumbnail),
+      imagen: producto.pictures ? producto.pictures[0].url : (producto.thumbnail), //Corregir producto.pictures[0].url porque no funciona, solo funciona el thumbnail
       cantidad: parseInt(cantidad)
     }
 
@@ -24,22 +25,25 @@ const DetalleProducto = ({ producto }) => {
         let lista = obtenerProductosLocalStorage().filter((prod) => prod.id != producto.id)
         lista.push(product)
         guardarProductosLocalStorage(lista)
+        Toast('Agregado') //Pruebas Toast (este ejemplo no anda)
+        
       }
       else {
         let lista = obtenerProductosLocalStorage()
         lista.push(product)
         guardarProductosLocalStorage(lista)
+        Toast('Agregado') //Pruebas Toast (este ejemplo no anda)
       }
     }
   }
   return (
     <div className="max-w-6xl mx-auto mt-24 p-6 bg-white shadow-md rounded-lg">
       <div className="flex flex-col md:flex-row justify-center">
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 center">
           <img src={
-            producto.pictures ? producto.pictures[0].url
+            producto.pictures ? producto.pictures[0].url  //Corregir producto.pictures[0].url porque no funciona, solo funciona el thumbnail
               : (producto.thumbnail)}
-            alt={producto.title} className="w-full h-auto object-cover rounded-lg" />
+            alt={producto.title} className="w-auto h-auto object-cover rounded-lg" /> 
         </div>
         <div className="md:w-1/2 md:pl-6">
           <h1 className="text-2xl font-bold text-gray-900">{producto.title}</h1>
