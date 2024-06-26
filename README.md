@@ -1,8 +1,28 @@
-# React + Vite
+# Proyecto: Página de Compras con API de Mercado Libre
+## Descripción
+Este proyecto es una aplicación web desarrollada con JavaScript que consume la API de Mercado Libre para crear una página de compras. La aplicación permite buscar productos, ver detalles, añadir productos al carrito, gestionar el carrito y finalizar la compra.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Alumnos
+Fernando Chazarreta - f.chazarreta@itecriocuarto.org.ar
 
-Currently, two official plugins are available:
+Mateo Gurrea - m.gurrea@itecriocuarto.org.ar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
+### Home Page:
+Buscador con un botón para realizar la búsqueda.
+Lista de resultados de búsqueda con imagen del producto, título y precio.
+### Detalles del Producto:
+Página de detalles del producto con información adicional como descripción, precio e imágenes adicionales.
+### Carrito de Compras:
+Añadir productos al carrito utilizando localStorage.
+Visualización del carrito con productos añadidos, cantidad de cada producto y precio total.
+Funcionalidades para aumentar/disminuir la cantidad de productos y eliminar productos del carrito.
+### Finalizar Compra:
+Botón para finalizar la compra que muestra un mensaje de éxito y limpia el carrito.
+Endpoints Utilizados
+
+## Buscar Productos:
+https://api.mercadolibre.com/sites/MLA/search?q=valorBuscado
+
+## Detalles del Producto:
+https://api.mercadolibre.com/items/ID_DEL_PRODUCTO
