@@ -15,7 +15,6 @@ const DetalleProducto = ({ producto }) => {
       setEstadoToast(true)
         setTimeout(function() {
           setEstadoToast(false)
-          window.location.href = '/cart'
         }, 3000);
     }, 1000);
   }
@@ -50,12 +49,17 @@ const DetalleProducto = ({ producto }) => {
       }
     }
   };
+
+  const buyNow =()=>{
+    addToCart()
+    window.location.href = '/cart'
+  }
   return (
     <>
       {estadoToast ? <Toast mensaje={"Producto Agregado"} /> : ""}
       <div className="max-w-6xl mx-auto mt-24 p-6 bg-white shadow-md rounded-lg">
-        <div className="flex flex-col md:flex-row justify-center">
-          <div className="md:w-1/2 center">
+        <div className="flex flex-col md:flex-row  justify-between">
+          <div className="md:w-2/3 flex items-center justify-center border-b-2 mx-5">
             <img
               src={
                 producto.pictures
@@ -63,10 +67,10 @@ const DetalleProducto = ({ producto }) => {
                   : producto.thumbnail
               }
               alt={producto.title}
-              className="w-auto h-auto object-cover rounded-lg"
+              className="w-auto h-auto object-cover"
             />
           </div>
-          <div className="md:w-1/2 md:pl-6">
+          <div className="md:w-1/3 p-6 border rounded-lg pt-5">
             <h1 className="text-2xl font-bold text-gray-900">
               {producto.title}
             </h1>
@@ -102,15 +106,16 @@ const DetalleProducto = ({ producto }) => {
                 }}
               />
             </div>
-            <div className="mt-6">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-                Comprar
+            <div className="flex flex-col mt-6">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 mb-4 rounded"
+              onClick={buyNow}>
+                Comprar ahora
               </button>
               <button
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-200 hover:bg-blue-300 hover:border-transparent	 text-blue-500 font-medium py-2 px-4 rounded"
                 onClick={addToCart}
               >
-                Añadir al Carrito
+                Añadir al carrito
               </button>
             </div>
           </div>
