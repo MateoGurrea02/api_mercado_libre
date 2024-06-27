@@ -1,6 +1,6 @@
-const obtenerProductosLocalStorage = () => {
-    const productosString = localStorage.getItem('itemsCarrito');
-    return productosString ? JSON.parse(productosString) : [];
+const obtenerProductosLocalStorage = (key) => {
+    const elementosString = localStorage.getItem(key);
+    return elementosString ? JSON.parse(elementosString) : [];
   };
 
 export default obtenerProductosLocalStorage

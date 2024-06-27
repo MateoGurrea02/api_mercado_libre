@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import CardProduct from '../components/CardProduct'
 import Loader from '../components/Loader';
 import useFetch from '../hooks/use-fetch';
+import Carousel from '../components/Carousel';
 
 
 function Home() {
@@ -31,6 +32,11 @@ function Home() {
   return (
 
     <div className='flex flex-col'>
+      {!iSearch ?
+        <Carousel></Carousel>
+        :
+        ''
+      }
       <Header getInputUser={getInputUser} />
       <div className="flex justify-center flex-wrap mt-40">
         {!isLoading ?

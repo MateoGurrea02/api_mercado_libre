@@ -1,5 +1,5 @@
-const guardarProductosLocalStorage = (productos) => {
-    localStorage.setItem('itemsCarrito', JSON.stringify(productos));
+const guardarProductosLocalStorage = (key,elementos) => {
+    localStorage.setItem(key, JSON.stringify(elementos));
   };
 
 export default guardarProductosLocalStorage

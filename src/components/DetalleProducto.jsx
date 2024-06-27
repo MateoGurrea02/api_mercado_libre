@@ -29,22 +29,22 @@ const DetalleProducto = ({ producto }) => {
       cantidad: parseInt(cantidad),
     };
 
-    if (obtenerProductosLocalStorage() == []) {
-      guardarProductosLocalStorage([product]);
+    if (obtenerProductosLocalStorage('itemsCarrito') == []) {
+      guardarProductosLocalStorage('itemsCarrito',[product]);
     } else {
       if (
-        obtenerProductosLocalStorage().some((prod) => prod.id === producto.id)
+        obtenerProductosLocalStorage('itemsCarrito').some((prod) => prod.id === producto.id)
       ) {
-        let lista = obtenerProductosLocalStorage().filter(
+        let lista = obtenerProductosLocalStorage('itemsCarrito').filter(
           (prod) => prod.id != producto.id
         );
         lista.push(product);
-        guardarProductosLocalStorage(lista);
+        guardarProductosLocalStorage('itemsCarrito',lista);
         timeoutToast()
       } else {
-        let lista = obtenerProductosLocalStorage();
+        let lista = obtenerProductosLocalStorage('itemsCarrito');
         lista.push(product);
-        guardarProductosLocalStorage(lista);
+        guardarProductosLocalStorage('itemsCarrito',lista);
         timeoutToast()
       }
     }

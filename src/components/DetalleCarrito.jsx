@@ -4,14 +4,14 @@ import obtenerProductosLocalStorage from '../utilities/obtenerProductosLocalStor
 import Toast from './Toast';
 
 const Carrito = () => {
-    const itemsCarrito = obtenerProductosLocalStorage()
+    const itemsCarrito = obtenerProductosLocalStorage('itemsCarrito')
     // Calcular el subtotal, cantidad total y total
     const subtotal = itemsCarrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
     const totalItems = itemsCarrito.reduce((acc, item) => acc + item.cantidad, 0);
     const envio = 5000; // Suponiendo un costo de envío fijo
     const total = subtotal + envio;
 
-    const [carrito, setCarrito] = useState(obtenerProductosLocalStorage())
+    const [carrito, setCarrito] = useState(obtenerProductosLocalStorage('itemsCarrito'))
     const [estadoToast, setEstadoToast] = useState(false);
 
     const timeoutToast =()=>{
@@ -29,7 +29,7 @@ const Carrito = () => {
         const nuevoCarrito = itemsCarrito
         nuevoCarrito[index].cantidad += 1
         setCarrito(nuevoCarrito)
-        guardarProductosLocalStorage(nuevoCarrito)
+        guardarProductosLocalStorage('itemsCarrito',nuevoCarrito)
     }
 
     const decrementarCantidad = (index) => {
@@ -37,7 +37,7 @@ const Carrito = () => {
         if (nuevoCarrito[index].cantidad > 1) {
             nuevoCarrito[index].cantidad -= 1
             setCarrito(nuevoCarrito)
-            guardarProductosLocalStorage(nuevoCarrito)
+            guardarProductosLocalStorage('itemsCarrito',nuevoCarrito)
         }
     }
 
@@ -45,7 +45,7 @@ const Carrito = () => {
     const eliminarProducto = (index) => {
         const nuevoCarrito = carrito.filter((_, i) => i !== index);
         setCarrito(nuevoCarrito)
-        guardarProductosLocalStorage(nuevoCarrito)
+        guardarProductosLocalStorage('itemsCarrito',nuevoCarrito)
     }
 
     const finishSell = ()=>{
