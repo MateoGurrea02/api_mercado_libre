@@ -2,6 +2,16 @@
 ## Descripción
 Este proyecto es una aplicación web desarrollada con JavaScript que consume la API de Mercado Libre para crear una página de compras. La aplicación permite buscar productos, ver detalles, añadir productos al carrito, gestionar el carrito y finalizar la compra.
 
+## Como correr el proyecto
+```
+npm install 
+```
+Para instalar todas las dependencias
+```
+npm run dev
+```
+Para iniciarlo
+
 ## Alumnos
 Fernando Chazarreta - f.chazarreta@itecriocuarto.org.ar
 
