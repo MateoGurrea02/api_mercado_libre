@@ -56,7 +56,7 @@ const Carrito = () => {
     return (
         <>
         {estadoToast ? <Toast mensaje={"Compra Finalizada con exito"} /> : ""}
-        <div className=" flex flex-col md:flex-row max-w-6xl m-24 p-6 bg-white shadow-md rounded-lg ">
+        <div className=" flex flex-col md:flex-row max-w-6xl mt-32 p-6 bg-white shadow-md rounded-lg ">
             <div className="md:w-2/3 min-w-96">
                 {itemsCarrito.map((item, index) => (
                     <div key={index} className="flex border rounded-lg py-16 mb-4">

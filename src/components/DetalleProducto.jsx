@@ -57,7 +57,7 @@ const DetalleProducto = ({ producto }) => {
   return (
     <>
       {estadoToast ? <Toast mensaje={"Producto Agregado"} /> : ""}
-      <div className="max-w-6xl mx-auto mt-24 p-6 bg-white shadow-md rounded-lg">
+      <div className="max-w-6xl mx-auto mt-32 p-6 bg-white shadow-md rounded-lg">
         <div className="flex flex-col md:flex-row  justify-between">
           <div className="md:w-2/3 flex items-center justify-center border-b-2 mx-5">
             <img
